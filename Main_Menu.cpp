@@ -25,14 +25,11 @@ int MenuStart()
 class Calculator
 {
 public:
-	double a;
-	double b;
-	string problem;
-	double result;
 	void GetCalculation() 
 	{
+		string problem;
+		double result = 0;
 		cout << "write your mathematical problem with space delinated:" << endl;
-		cin.ignore();
 		getline(cin, problem);
 		stringstream ss(problem);
 		vector<string> split_problem;
@@ -62,62 +59,13 @@ public:
 		{
 			cout << "unsupported type of equation" << endl;
 		}
-		cout << "equals:" << " " << result << endl;
+		cout << "equals: " << result << endl;
 
 	}
-	/*void GetCalculationType()
-	{
-		cout << "choose calculation type:" << endl;
-		cout << "addition[+]" << " " << "difference[-]" << " " << "multiplication[*]" << "division[/]" << " " << "square[^2]" << endl;
-		cin >> typeoutput;
-	}
-	void GetNums()
-	{
-		if (typeoutput == "+")
-		{
-			cout << "insert two numbers to add" << endl;
-			cin >> a;
-			cin >> b;
-			result = a + b;
-			cout << "The result of your addition equals:" << " " << result << endl;
-		}
-		else if (typeoutput == "-")
-		{
-			cout << "insert two numbers to Substract" << endl;
-			cin >> a;
-			cin >> b;
-			result = a - b;
-			cout<<"The result of your Substraction equals:" << " " << result << endl;
-		}
-		else if (typeoutput == "*")
-		{
-			cout << "insert two numbers to Multiply" << endl;
-			cin >> a;
-			cin >> b;
-			result = a * b;
-			cout<< "The result of your Multiplication equals : " << " " << result << endl;
-		}
-		else if (typeoutput == "/")
-		{
-			cout << "insert two numbers to divide" << endl;
-			cin >> a;
-			cin >> b;
-			result = a / b;
-			cout << "The result of your division equals : " << " " << result << endl;
-		}
-		else if (typeoutput == "2^") 
-		{
-			cout << "insert an number to square" << endl;
-			cin >> a;
-			result = a * a;
-			cout << "The result of your exponentation equals : " << " " << result << endl;
-		}
-	}*/
 	void GetMean()
 	{
 		string input;
 		cout << "enter your numbers space delinated" << endl;
-		cin.ignore();
 		getline(cin, input);
 		string num;
 		stringstream ss(input);
@@ -157,9 +105,11 @@ int main()
 	if (choice == 1)
 	{
 		cout << "You entered Calculator" << endl;
-		//calculate.GetCalculationType();
-		//calculate.GetNums();
-		calculate.GetCalculation();
+		cin.ignore();
+		while (true)
+		{
+			calculate.GetCalculation();
+		}
 	}
 	else if (choice == 2) 
 	{
@@ -168,7 +118,11 @@ int main()
 	else if (choice == 3) 
 	{
 		cout << "You entered Mean Calculator" << endl;
-		calculate.GetMean();
+		cin.ignore();
+		while (true)
+		{
+			calculate.GetMean();
+		}
 	}
 	return 0;
 }
