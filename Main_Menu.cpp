@@ -1,5 +1,7 @@
 #include <iostream>
+#include <sstream>
 #include <stdlib.h>
+#include <vector>
 using namespace std;
 
 int MenuStart()
@@ -73,19 +75,43 @@ public:
 			cout << "The result of your exponentation equals : " << " " << result << endl;
 		}
 	}
-};
+	void GetMean()
+	{
+		string input;
+		cout << "enter your numbers space delinated" << endl;
+		cin.ignore();
+		getline(cin, input);
+		string num;
+		stringstream ss(input);
+		vector<double> numbers;
 
+		while (getline(ss, num, ' '))
+		{
+			numbers.push_back(stod(num));
+		}
+		double sum = 0;
+		for (double i : numbers)
+		{
+			sum += i;
+		}
+		cout << "Your mean equals:" << " " << sum / numbers.size()<< endl;
+	}
+};
 int main()
 {
 	int choice;
 	choice = MenuStart();
+	Calculator calculate;
 	if (choice == 1)
 	{
 		cout << "You entered Calculator" << endl;
-		Calculator calculate;
 		calculate.GetCalculationType();
 		calculate.GetNums();
 	}
-
+	else if (choice == 3) 
+	{
+		cout << "You entered Mean Calculator" << endl;
+		calculate.GetMean();
+	}
 	return 0;
 }
