@@ -27,9 +27,45 @@ class Calculator
 public:
 	double a;
 	double b;
-	string typeoutput;
+	string problem;
 	double result;
-	void GetCalculationType()
+	void GetCalculation() 
+	{
+		cout << "write your mathematical problem with space delinated:" << endl;
+		cin.ignore();
+		getline(cin, problem);
+		stringstream ss(problem);
+		vector<string> split_problem;
+		string part;
+
+		while (getline(ss,part, ' '))
+		{
+			split_problem.push_back(part);
+		}
+		if (split_problem[1] == "+")
+		{
+			result = stod(split_problem[0]) + stod(split_problem[2]);
+		}
+		else if (split_problem[1] == "-")
+		{
+			result = stod(split_problem[0]) - stod(split_problem[2]);
+		}
+		else if (split_problem[1] == "*")
+		{
+			result = stod(split_problem[0]) * stod(split_problem[2]);
+		}
+		else if (split_problem[1] == "/" )
+		{
+			result = stod(split_problem[0]) / stod(split_problem[2]);
+		}
+		else 
+		{
+			cout << "unsupported type of equation" << endl;
+		}
+		cout << "equals:" << " " << result << endl;
+
+	}
+	/*void GetCalculationType()
 	{
 		cout << "choose calculation type:" << endl;
 		cout << "addition[+]" << " " << "difference[-]" << " " << "multiplication[*]" << "division[/]" << " " << "square[^2]" << endl;
@@ -76,7 +112,7 @@ public:
 			result = a * a;
 			cout << "The result of your exponentation equals : " << " " << result << endl;
 		}
-	}
+	}*/
 	void GetMean()
 	{
 		string input;
@@ -121,8 +157,9 @@ int main()
 	if (choice == 1)
 	{
 		cout << "You entered Calculator" << endl;
-		calculate.GetCalculationType();
-		calculate.GetNums();
+		//calculate.GetCalculationType();
+		//calculate.GetNums();
+		calculate.GetCalculation();
 	}
 	else if (choice == 2) 
 	{
