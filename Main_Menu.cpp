@@ -2,6 +2,8 @@
 #include <sstream>
 #include <stdlib.h>
 #include <vector>
+#include <thread>
+#include <chrono>
 using namespace std;
 
 int MenuStart()
@@ -97,6 +99,20 @@ public:
 		cout << "Your mean equals:" << " " << sum / numbers.size()<< endl;
 	}
 };
+void PlayAnim()
+{
+	int i = 0;
+	char spinnin[4] = {'|','/','--','\\'};
+	while (true)
+	{
+		system("CLs");
+		cout << spinnin[i] << endl;
+		this_thread::sleep_for(chrono::milliseconds(300));
+		i += 1;
+		i = i % 4;
+	}
+}
+
 int main()
 {
 	int choice;
@@ -107,6 +123,10 @@ int main()
 		cout << "You entered Calculator" << endl;
 		calculate.GetCalculationType();
 		calculate.GetNums();
+	}
+	else if (choice == 2) 
+	{
+		PlayAnim();
 	}
 	else if (choice == 3) 
 	{
