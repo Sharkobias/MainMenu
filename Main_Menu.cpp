@@ -25,6 +25,88 @@ int MenuStart()
 	cin >> choice;
 	return choice;
 }
+
+class OpNode;
+
+class ValueNode 
+{
+public:
+	ValueNode() {}
+	ValueNode(double value);
+	ValueNode(OpNode* op);
+private:
+	double _value;
+	OpNode* _op;
+	bool _check;
+public:
+	double GetValue();
+};
+
+class OpNode 
+{
+public:
+	OpNode() {}
+	OpNode(ValueNode first, ValueNode second, string operation);
+	ValueNode _first;
+	ValueNode _second;
+	string _operation;
+	ValueNode Evaluate();
+};
+ValueNode OpNode::Evaluate()
+{
+	double result;
+	if (_operation == "+")
+	{
+		result = _first.GetValue() + _second.GetValue();
+	}
+	else if (_operation == "-")
+	{
+		result = _first.GetValue() - _second.GetValue();
+	}
+	else if (_operation == "*")
+	{
+		result = _first.GetValue() * _second.GetValue();
+	}
+	else if (_operation == "/")
+	{
+		result = _first.GetValue() / _second.GetValue();
+	}
+	else
+	{
+		cout << "unsupported type of equation" << endl;
+	}
+	ValueNode ResultNode(result);
+
+	return ResultNode;
+}
+OpNode::OpNode(ValueNode first, ValueNode second, string operation)
+{
+	_first = first;
+	_second = second;
+	_operation = operation;
+}
+ValueNode::ValueNode(double value) {
+	_value = value;
+	_check = false;
+}
+
+ValueNode::ValueNode(OpNode* op) {
+	_op = op;
+	_check = true;
+}
+
+double ValueNode::GetValue() {
+	if (_check == false)
+	{
+		return _value;
+	}
+	else
+	{
+		ValueNode result = _op->Evaluate();
+		return result.GetValue();
+	}
+}
+
 class Calculator
 {
 public:
@@ -32,7 +114,6 @@ public:
 	{
 		string str;
 		string problem;
-		double result = 0;
 		cout << "write your mathematical problem with space delinated:" << endl;
 		getline(cin, problem);
 		if (problem == "0")
@@ -47,27 +128,13 @@ public:
 		{
 			split_problem.push_back(part);
 		}
-		if (split_problem[1] == "+")
-		{
-			result = stod(split_problem[0]) + stod(split_problem[2]);
-		}
-		else if (split_problem[1] == "-")
-		{
-			result = stod(split_problem[0]) - stod(split_problem[2]);
-		}
-		else if (split_problem[1] == "*")
-		{
-			result = stod(split_problem[0]) * stod(split_problem[2]);
-		}
-		else if (split_problem[1] == "/")
-		{
-			result = stod(split_problem[0]) / stod(split_problem[2]);
-		}
-		else
-		{
-			cout << "unsupported type of equation" << endl;
-		}
-		cout << "equals: " << result << endl;
+
+		ValueNode first(stod(split_problem[0]));
+		ValueNode second(stod(split_problem[2]));
+		OpNode exp(first, second, split_problem[1]);
+		ValueNode result = exp.Evaluate();
+
+		cout << "equals: " << result.GetValue() << endl;
 		return true;
 
 	}
@@ -160,7 +227,7 @@ int main()
 		else if (choice == 0)
 		{
 			cout << "you exited the program" << endl;
-			abort;
+			abort();
 		}
 		else
 		{
