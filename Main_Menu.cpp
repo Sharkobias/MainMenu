@@ -130,40 +130,44 @@ void PlayAnim()
 
 int main()
 {
-	int choice;
-	choice = MenuStart();
-	Calculator calculate;
-	if (choice == 1)
+	while(true)
 	{
-		cout << "You entered Calculator" << endl;
-		cin.ignore();
-		while (calculate.GetCalculation()) {}
-	}
-	else if (choice == 2)
-	{
-		PlayAnim();
-	}
-	else if (choice == 3)
-	{
-		cout << "You entered Mean Calculator" << endl;
-		cin.ignore();
-		while (calculate.GetMean()) {}
-	}
-	else if (choice == 4)
-	{
-		cout << "You have entered random number generator" << endl;
-		cin.ignore();
-		while (calculate.GetRandom()) {}
-	}
-	else if (choice == 0)
-	{
-		cout << "you exited the program" << endl;
-		abort;
-	}
-	else
-	{
-		system("CLS");
-		cout << "No function found underneath that symbol, try again" << endl;
+		int choice;
+		choice = MenuStart();
+		Calculator calculate;
+		if (choice == 1)
+		{
+			cout << "You entered Calculator" << endl;
+			cin.ignore();
+			while (calculate.GetCalculation()) {}
+		}
+		else if (choice == 2)
+		{
+			PlayAnim();
+		}
+		else if (choice == 3)
+		{
+			cout << "You entered Mean Calculator" << endl;
+			cin.ignore();
+			while (calculate.GetMean()) {}
+		}
+		else if (choice == 4)
+		{
+			cout << "You have entered random number generator" << endl;
+			cin.ignore();
+			while (calculate.GetRandom()) {}
+		}
+		else if (choice == 0)
+		{
+			cout << "you exited the program" << endl;
+			abort;
+		}
+		else
+		{
+			system("CLS");
+			cout << "No function found underneath that symbol, try again" << endl;
+		}
 	}
 	return 0;
+	
 }
